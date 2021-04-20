@@ -5,6 +5,7 @@ background: var(--white);
 height: 6.5rem;
 
 display: flex;
+flex-direction: row;
 align-items: center;
 padding: 2rem 4rem;
 border-bottom: 1px solid var(--gray-100);
