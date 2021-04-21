@@ -35,11 +35,6 @@ export const ListItems = styled.li`
     border-radius: 1rem;
   }
 `;
-
-export const AllEpisodes = styled.section``;
-
-export const LastestEpisodesImage = styled.img``;
-
 export const EpisodesDetails = styled.div`
   flex: 1;
   margin-left: 1rem;
@@ -112,4 +107,83 @@ export const ButtonPlay = styled.button`
 export const ImagePlay = styled.img`
   width: 1.5rem;
   height: 1.5rem;
+`;
+
+export const AllEpisodes = styled.section`
+  padding-bottom: 2rem;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+`;
+
+export const Th = styled.th`
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-200);
+  text-transform: uppercase;
+  font: 500 0.75rem Lexend, sans-serif;
+  text-align: left;
+`;
+export const Td = styled.td`
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 0.875rem;
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+  }
+`;
+export const TdImage = styled.td`
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 0.875rem;
+  width: 72px;
+  img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+  }
+`;
+
+export const TitleEpisode = styled.a`
+  color: var(--gray-80);
+  font-family: Lexend, sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.4rem;
+  font-size: 1rem;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const TdButton = styled.td`
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 0.875rem;
+`;
+export const TdPublishedAt = styled.td`
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 0.875rem;
+  width: 100px;
+`;
+
+export const ButtonTablePlay = styled.button`
+  width: 2rem;
+  height: 2rem;
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: 0.5rem;
+  font-size: 0;
+  transition: filter 0.3s;
+  &:hover {
+    filter: brightness(0.95);
+  }
+`;
+export const ImagePlayTable = styled.img`
+  width: 1.25rem;
+  height: 1.25rem;
 `;

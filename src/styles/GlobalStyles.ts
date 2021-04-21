@@ -50,7 +50,7 @@ h1{
 H2{
   font-size: 1.5rem;
 }
-button{
+button, a{
   cursor: pointer;
 }
 `;

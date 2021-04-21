@@ -23,5 +23,5 @@ text-transform: capitalize;
 `;
 
 export const Img = styled.img`
-
+cursor: pointer;
 `;

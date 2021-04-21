@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { format, parseISO } from "date-fns"; //! parseISO converte data string em Date()
 import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
@@ -11,8 +12,7 @@ type EpisodeProps = {
   id: string;
   title: string;
   thumbnail: string;
-  description: string;
-  members: string;
+   members: string;
   duration: number;
   durationAsString: string;
   url: string;
@@ -48,7 +48,6 @@ export const getStaticProps: GetStaticProps = async () => {
         Number(episode.file.duration)
       ),
       duration: Number(episode.file.duration),
-      description: episode.description,
       url: episode.file.url,
     };
   });
@@ -74,7 +73,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           {latestEpisodes.map((episode) => {
             return (
               <S.ListItems key={episode.id}>
-                 {/* imagem vindas de outros domains cria o arquivo
+                {/* imagem vindas de outros domains cria o arquivo
                  next.config.js */}
                 <Image
                   width={192}
@@ -84,7 +83,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   objectFit='cover'
                 />
                 <S.EpisodesDetails>
-                  <S.LinkEpisodes href=''>{episode.title}</S.LinkEpisodes>
+                  <Link href={`/episodes/${episode.id}`}>
+                    <S.LinkEpisodes>{episode.title}</S.LinkEpisodes>
+                  </Link>
                   <S.EpisodeMembers>{episode.members}</S.EpisodeMembers>
                   <S.PublishedAt>{episode.publishedAt}</S.PublishedAt>
                   <S.Duration>{episode.durationAsString}</S.Duration>
@@ -98,7 +99,56 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         </S.ContainerList>
       </S.LatestEpisodes>
 
-      <S.AllEpisodes></S.AllEpisodes>
+      <S.AllEpisodes>
+        <S.Title>Todos episódios</S.Title>
+
+        <S.Table cellSpacing={0}>
+          <thead>
+            <tr>
+              <S.Th></S.Th>
+              <S.Th>Podcast</S.Th>
+              <S.Th>Integrantes</S.Th>
+              <S.Th>Data</S.Th>
+              <S.Th>Duração</S.Th>
+              <S.Th></S.Th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {allEpisodes.map((episode) => {
+              return (
+                <tr key={episode.id}>
+                  <S.TdImage>
+                    <Image
+                      width={120}
+                      height={120}
+                      src={episode.thumbnail}
+                      alt={episode.title}
+                      objectFit='cover'
+                    />
+                  </S.TdImage>
+                  <S.Td>
+                    <Link href={`/episodes/${episode.id}`}>
+                      <S.TitleEpisode>{episode.title}</S.TitleEpisode>
+                    </Link>
+                  </S.Td>
+                  <S.Td>{episode.members}</S.Td>
+                  <S.TdPublishedAt>{episode.publishedAt}</S.TdPublishedAt>
+                  <S.Td>{episode.durationAsString}</S.Td>
+                  <S.TdButton>
+                    <S.ButtonTablePlay>
+                      <S.ImagePlayTable
+                        src='/play-green.svg'
+                        alt='Tocar episódio'
+                      />
+                    </S.ButtonTablePlay>
+                  </S.TdButton>
+                </tr>
+              );
+            })}
+          </tbody>
+        </S.Table>
+      </S.AllEpisodes>
     </S.HomePage>
   );
 }
