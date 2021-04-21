@@ -6,7 +6,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationsToTimeString";
 
-import * as S from "./homeStyles";
+import * as S from "../styles/homeStyles";
 //! O que tem de typo em cada episódio
 type EpisodeProps = {
   id: string;

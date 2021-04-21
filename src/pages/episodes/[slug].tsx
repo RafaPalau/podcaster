@@ -7,7 +7,7 @@ import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationsToTimeString";
 import ptBR from "date-fns/locale/pt-BR";
 
-import * as S from "./styles";
+import * as S from "../../styles/stylesEpisodes";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;
