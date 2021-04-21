@@ -16,9 +16,8 @@ export function Player() {
         <S.Progress>
           <S.ProgressSpan>00:00</S.ProgressSpan>
           <S.Slyder>
-          <S.EmptySlider />
+            <S.EmptySlider />
           </S.Slyder>
-        
           <S.ProgressSpan>00:00</S.ProgressSpan>
         </S.Progress>
         <S.ContainerButtons>
