@@ -72,6 +72,12 @@ export const Button = styled.button`
   background: transparent;
   border: 0;
   font-size: 0;
+  &:disabled {
+    cursor: default;
+  }
+  &:hover:not(:disabled) {
+    filter: brightness(0.8);
+  }
 `;
 export const PlayButton = styled.button`
   background: transparent;
@@ -81,9 +87,35 @@ export const PlayButton = styled.button`
   height: 4rem;
   border-radius: 1rem;
   background: var(--purple-400);
+  transition: filter 0.2s;
+  &:disabled {
+    cursor: default;
+  }
+  &:hover:not(:disabled) {
+    filter: brightness(0.9);
+  }
 `;
 
 export const Footer = styled.footer`
   align-self: stretch;
   /* margin: 0 auto; */
+`;
+
+export const CurrentEpisode = styled.div`
+  text-align: center;
+  img {
+    border-radius: 1.5rem;
+  }
+  strong {
+    display: block;
+    margin-top: 2rem;
+    font: 600 1.25rem Lexend, sans-serif;
+    line-height: 1.75rem;
+  }
+  span {
+    display: block;
+    margin-top: 1rem;
+    opacity: 0.6;
+    line-height: 1.5rem;
+  }
 `;

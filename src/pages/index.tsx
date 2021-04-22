@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import { GetStaticProps } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { format, parseISO } from "date-fns"; //! parseISO converte data string em Date()
 import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationsToTimeString";
+import { PlayerContext } from "../contexts/PlayerContext";
 
 import * as S from "../styles/homeStyles";
 //! O que tem de typo em cada episódio
@@ -65,6 +67,8 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+const {play} = useContext(PlayerContext)
+
   return (
     <S.HomePage>
       <S.LatestEpisodes>
@@ -90,7 +94,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <S.PublishedAt>{episode.publishedAt}</S.PublishedAt>
                   <S.Duration>{episode.durationAsString}</S.Duration>
                 </S.EpisodesDetails>
-                <S.ButtonPlay>
+                <S.ButtonPlay onClick={() => play(episode) }>
                   <S.ImagePlay src='/play-green.svg' alt='Tocar episódio' />
                 </S.ButtonPlay>
               </S.ListItems>
