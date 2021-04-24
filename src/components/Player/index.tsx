@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { useContext, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-import { PlayerContext } from "../../contexts/PlayerContext";
+import { PlayerContext, usePlayer } from "../../contexts/PlayerContext";
 import * as S from "./styles";
 
 export function Player() {
@@ -15,7 +15,13 @@ export function Player() {
     isPlaying,
     togglePlay,
     setPlayingState,
-  } = useContext(PlayerContext);
+    playNext,
+    isLooping,
+    toggleLoop,
+    playPrevious,
+    hasNext,
+    hasPrevious,
+  } = usePlayer();
 
   useEffect(() => {
     if (!audioRef.current) {
@@ -75,6 +81,7 @@ export function Player() {
           <audio
             src={episode.url}
             autoPlay
+            loop={isLooping}
             ref={audioRef}
             onPlay={() => setPlayingState(true)}
             onPause={() => setPlayingState(false)}
@@ -85,22 +92,22 @@ export function Player() {
           <S.Button disabled={!episode}>
             <S.Img src='/shuffle.svg' alt='Embaralhar' />
           </S.Button>
-          <S.Button disabled={!episode}>
+          <S.Button disabled={!episode || !hasPrevious} onClick={playPrevious}>
             <S.Img src='/play-previous.svg' alt='Tocar anterior' />
           </S.Button>
 
           <S.PlayButton disabled={!episode} onClick={togglePlay}>
             {isPlaying ? (
-              <S.Img src='/play.svg' alt='Tocar' />
+              <S.Img src='/pause.svg' alt='Pausar' />
             ) : (
-              <S.Img src='/pause.svg' alt='Tocar' />
+              <S.Img src='/play.svg' alt='Tocar' />
             )}
           </S.PlayButton>
 
-          <S.Button disabled={!episode}>
+          <S.Button disabled={!episode || !hasNext} onClick={playNext}>
             <S.Img src='/play-next.svg' alt='Tocar próxima' />
           </S.Button>
-          <S.Button disabled={!episode}>
+          <S.Button disabled={!episode} onClick={toggleLoop } >
             <S.Img src='/repeat.svg' alt='Repetir' />
           </S.Button>
         </S.ContainerButtons>

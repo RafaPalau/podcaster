@@ -74,10 +74,12 @@ export const Button = styled.button`
   font-size: 0;
   &:disabled {
     cursor: default;
+    opacity: 0.5;
   }
   &:hover:not(:disabled) {
     filter: brightness(0.8);
   }
+
 `;
 export const PlayButton = styled.button`
   background: transparent;

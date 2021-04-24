@@ -8,6 +8,7 @@ import { convertDurationToTimeString } from "../../utils/convertDurationsToTimeS
 import ptBR from "date-fns/locale/pt-BR";
 
 import * as S from "../../styles/stylesEpisodes";
+import { PlayerContext, usePlayer } from "../../contexts/PlayerContext";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;
@@ -73,6 +74,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 export default function Episode({ episode }: EpisodeProps) {
+
+ const {play} = usePlayer()
   return (
     <S.ContainerEpisode>
       <S.ThumbnailContainer>
@@ -87,7 +90,7 @@ export default function Episode({ episode }: EpisodeProps) {
           src={episode.thumbnail}
           objectFit='cover'
         />
-        <S.ButtoncontainerPlay type='button'>
+        <S.ButtoncontainerPlay type='button' onClick={() => play(episode)}>
           <img src='/play.svg' alt='Tocar episódio' />
         </S.ButtoncontainerPlay>
       </S.ThumbnailContainer>

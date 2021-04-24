@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,7 +5,7 @@ import { format, parseISO } from "date-fns"; //! parseISO converte data string e
 import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationsToTimeString";
-import { PlayerContext } from "../contexts/PlayerContext";
+import { PlayerContext, usePlayer } from "../contexts/PlayerContext";
 
 import * as S from "../styles/homeStyles";
 //! O que tem de typo em cada episódio
@@ -14,7 +13,7 @@ type EpisodeProps = {
   id: string;
   title: string;
   thumbnail: string;
-   members: string;
+  members: string;
   duration: number;
   durationAsString: string;
   url: string;
@@ -67,14 +66,16 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-const {play} = useContext(PlayerContext)
+  const { playList } = usePlayer()
+
+  const episodeList = [...latestEpisodes, ...allEpisodes];
 
   return (
     <S.HomePage>
       <S.LatestEpisodes>
         <S.Title>Últimos lançamentos</S.Title>
         <S.ContainerList>
-          {latestEpisodes.map((episode) => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <S.ListItems key={episode.id}>
                 {/* imagem vindas de outros domains cria o arquivo
@@ -94,7 +95,7 @@ const {play} = useContext(PlayerContext)
                   <S.PublishedAt>{episode.publishedAt}</S.PublishedAt>
                   <S.Duration>{episode.durationAsString}</S.Duration>
                 </S.EpisodesDetails>
-                <S.ButtonPlay onClick={() => play(episode) }>
+                <S.ButtonPlay onClick={() => playList(episodeList, index)}>
                   <S.ImagePlay src='/play-green.svg' alt='Tocar episódio' />
                 </S.ButtonPlay>
               </S.ListItems>
@@ -119,7 +120,7 @@ const {play} = useContext(PlayerContext)
           </thead>
 
           <tbody>
-            {allEpisodes.map((episode) => {
+            {allEpisodes.map((episode, index) => {
               return (
                 <tr key={episode.id}>
                   <S.TdImage>
@@ -139,7 +140,11 @@ const {play} = useContext(PlayerContext)
                   <S.Td>{episode.members}</S.Td>
                   <S.TdPublishedAt>{episode.publishedAt}</S.TdPublishedAt>
                   <S.Td>{episode.durationAsString}</S.Td>
-                  <S.TdButton>
+                  <S.TdButton
+                    onClick={() =>
+                      playList(episodeList, index + latestEpisodes.length)
+                    }
+                  >
                     <S.ButtonTablePlay>
                       <S.ImagePlayTable
                         src='/play-green.svg'
