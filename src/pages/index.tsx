@@ -6,7 +6,7 @@ import ptBR from "date-fns/locale/pt-BR";
 import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationsToTimeString";
 import { PlayerContext, usePlayer } from "../contexts/PlayerContext";
-
+import Head from 'next/head'
 import * as S from "../styles/homeStyles";
 //! O que tem de typo em cada episódio
 type EpisodeProps = {
@@ -72,6 +72,9 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
   return (
     <S.HomePage>
+      <Head>
+        <title>Home | Podcaster</title>
+      </Head>
       <S.LatestEpisodes>
         <S.Title>Últimos lançamentos</S.Title>
         <S.ContainerList>

@@ -9,6 +9,7 @@ import ptBR from "date-fns/locale/pt-BR";
 
 import * as S from "../../styles/stylesEpisodes";
 import { PlayerContext, usePlayer } from "../../contexts/PlayerContext";
+import Head from "next/head";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params;
@@ -78,6 +79,9 @@ export default function Episode({ episode }: EpisodeProps) {
  const {play} = usePlayer()
   return (
     <S.ContainerEpisode>
+        <Head>
+        <title>{episode.title} | Podcaster</title>
+      </Head>
       <S.ThumbnailContainer>
         <Link href='/'>
           <S.ButtoncontainerBack type='button'>
