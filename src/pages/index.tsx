@@ -17,7 +17,7 @@ type EpisodeProps = {
   duration: number;
   durationAsString: string;
   url: string;
-  publishedAt: string;
+  publishedAt: string
 };
 //! Tipo do Array episódios
 type HomeProps = {
